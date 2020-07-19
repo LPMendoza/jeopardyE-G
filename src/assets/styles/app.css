@@ -54,7 +54,7 @@ body {
 .btn-success {
     background-color: #06D6A0 !important;
     border: none !important;
-    color: #fff;
+    color: #fff !important;
     transition: 0.2s ease;
 }
 
@@ -172,7 +172,20 @@ body {
     justify-content: space-between;
     align-items: baseline;
     -webkit-app-region: no-drag;
+}
 
+
+.btnBack {
+    border-radius: 0px !important;
+    -webkit-app-region: no-drag;
+}
+
+.btnBack:hover {
+    background-color: rgba(0, 0, 0, .1) !important;
+}
+
+.btnBack:focus, .btnBack:active {
+    box-shadow: none !important;
 }
 
 .window-btn {
@@ -200,13 +213,81 @@ body {
 }
 
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: "Futura-Bold";
 }
 
-.boards-controls {
-    display: flex;
+.titleColumn {
+    font-family: "Futura-Bold";
+    text-align: center;
+    border: none;
+}
 
+input:focus.titleColumn {
+    outline: none !important;
+}
+
+.titleBoard {
+    font-family: "Futura-Bold";
+    font-size: 2.5rem;
+    text-align: center;
+    border: none !important;
+}
+
+input.titleBoard {
+    align-self: center !important;
+    outline: none !important;
+}
+
+input:focus.titleBoard {
+    outline: none !important;
+}
+
+.ctrl-grid-boards {
+    position: fixed;
+    top: 50%;
+    /* left: 50%; */
+    margin-top: -100px;
+    border-radius: 0px 4px 4px 4px;
+}
+
+.ctrl-grid-boards .btn {
+    font-size: 16px !important;
+}
+
+.btn-white:active {
+    box-shadow: 0px 0px 0px 4px #eee !important;
+}
+
+.btn-white:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.container-palette-color {
+    opacity: 0;
+    transform: scaleZ(0);
+    top: 50%;
+    background-color: #fff;
+    transition: 0.2s ease;
+    border-radius: 4px;
+    position: absolute !important;
+    left: 0% !important;
+    z-index: 1000;
+}
+
+.container-palette-color.activePalete{
+    opacity: 1;
+    transform: scale(1);
+    position: absolute !important;
+    left: 0% !important;
+    top: 20%;
+    z-index: 1000;
+    transition: 0.2s ease;
+}
+
+.dropdown-menu {
+    border: none !important;
 }
 
 input::placeholder {
@@ -244,8 +325,6 @@ input::placeholder {
     color: rgba(57, 62, 70, 0.8);
     border: none;
 }
-
-
 
 .titulo-board-input:focus {
     outline: none;
@@ -288,6 +367,36 @@ input::placeholder {
     flex: 1;
 }
 
+.container-column {
+    padding: 0rem .25rem;
+}
+
+.column-board {
+    width: 200px !important; 
+    text-align: center !important;
+}
+
+.cell-board {
+    width: 200px;
+    height: 60px !important;
+    margin: 0rem 0rem 0.5rem 0rem;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cell-board > input {
+    width: 100px !important;
+    text-align: center;
+    border: none !important;
+}
+
+.cell-board>input:focus {
+    outline: none;
+}
+
 .container-NoBoards {
     margin-top: 20%;
     color: rgba(57, 62, 70, .5);
@@ -297,7 +406,7 @@ input::placeholder {
     background-color: rgba(57, 62, 70, .5);
 }
 
-.btn-board-card {
+.btn-circle {
     width: 34px;
     height: 34px;
     padding: 0px !important;
@@ -316,9 +425,130 @@ input::placeholder {
     outline: none;
 }
 
+.container-ctrl-columns {
+    opacity:  0;
+    transition: 0.2s ease;
+}
+
+.container-column:hover .container-ctrl-columns {
+    opacity: 1;
+    transition: 0.2s ease;
+}
+
 .option-color {
     width: 32px;
     height: 32px;
+}
+
+.page-question {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transform: scale(0);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transition: 0.3s ease-in-out;
+}
+
+.page-question.question-showed {
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+.page-question .menuBar-question {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.5;
+    z-index: 999;
+}
+
+.container-answer {
+    display: flex;
+    position: absolute;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.5;
+    z-index: 998;
+    transform: scaleY(0);
+    transition: 0.2s ease-in;
+}
+
+.container-answer.showAnswer {
+    transform: scale(1);
+    position: relative;
+    transition: 0.2s ease-in;
+}
+
+.container-question .ql-toolbar span,
+.container-question .ql-toolbar svg {
+    color: #fff !important;
+    fill: #fff !important;
+}
+
+.container-question .ql-toolbar .ql-stroke {
+    fill: none;
+    stroke: #fff;
+}
+
+.container-question .ql-toolbar .ql-fill {
+    fill: #fff;
+    stroke: none;
+}
+
+.container-question .ql-toolbar .ql-picker {
+    color: #fff;
+}
+
+.ql-container {
+    font-family: "Futura-Bold";
+}
+
+.ql-picker-options .ql-picker-item::before {
+    color: #393e46 !important;
+}
+
+.txtQuestion, .txtAnswer {
+    font-family: "Futura-Bold";
+}
+
+.ql-editor h1 {
+    font-size: 2.5rem !important;
+}
+
+.ql-editor h2 {
+    font-size: 2rem !important;
+}
+
+.ql-editor h3 {
+    font-size: 1.75rem !important;
+}
+
+.ql-editor h4 {
+    font-size: 1.5rem !important;
+}
+
+.ql-editor h5 {
+    font-size: 1.25rem !important;
+}
+
+.ql-editor h6 {
+    font-size: 1rem !important;
+}
+
+.btnAnswer {
+    border-radius: 0px 0px 0px 4px !important;
 }
 
 .swal-title {
@@ -402,17 +632,37 @@ input::placeholder {
     }
 }
 
+.page {
+    animation: fade-in 0.2s ease-in;
+}
 
 
+/* .shadow-sm-n {
+    box-shadow: 4px 4px 10px #c8c8c8,
+    -4px -4px 5px #ffffff !important;
+}
 
-/* .shadow-sm {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+.btn-white {
+    background-color: #f8f8f8 !important;
+}
+
+.bg-white {
+    background-color: #f8f8f8 !important;
 } */
 
-/*.btn-group .btn:first-child {
-    border-radius: 20px 0px 0px 20px !important;
+input {
+    background: transparent !important;
 }
-.btn-group .btn:last-child {
-    border-radius: 0px 20px 20px 0px !important;
-}*/
+
+.__react_component_tooltip {
+    font-family: "Futura-Bold" !important;
+}
+ 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

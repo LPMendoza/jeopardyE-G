@@ -59,19 +59,24 @@ export default class BoardController {
             "titleColumn": "Columna 1",
             "questions": [{
                 "text": "",
-                "answer": ""
+                "answer": "",
+                "value": 100
             }, {
                 "text": "",
-                "answer": ""
+                "answer": "",
+                "value": 200
             }, {
                 "text": "",
-                "answer": "Respuesta"
+                "answer": "Respuesta",
+                "value": 300
             }, {
                 "text": "",
-                "answer": "Respuesta"
+                "answer": "Respuesta",
+                "value": 400
             }, {
                 "text": "",
-                "answer": "Respuesta"
+                "answer": "Respuesta",
+                "value": 500
             }]
         }]
 
@@ -101,9 +106,35 @@ export default class BoardController {
         if(type == 1) {
             board = this.crearBoardJSON(board);
         }
-
         fs.writeFileSync(this.pathBoards + `${board.idBoard}`, JSON.stringify(board));
         return board;
+    }
+
+    addColumn(length) {
+        let column = {
+            "titleColumn": "Columna",
+            "questions": []
+        }
+        for(var i = 1; i <= length; i++) {
+            column.questions.push({
+                "text": "",
+                "answer": "",
+                "value": (i * 100)
+            });
+        }
+        return column;
+    }
+
+    addRow(columns) {
+        let lastValue = columns[0].questions[columns[0].questions.length - 1].value;
+        for (var i = 0; i < columns.length; i++) {
+            columns[i].questions.push({
+                "text": "",
+                "answer": "",
+                "value": (lastValue + 100)
+            })
+        }
+        return columns;
     }
 
     copyBoard(index) {
@@ -121,6 +152,13 @@ export default class BoardController {
         
     }
     
+    updateBoard(board) {
+
+        board["dateModified"] = this.createDate();
+        fs.writeFileSync(this.pathBoards + `${board.idBoard}`, JSON.stringify(board));
+
+    }
+
     deleteBoard(index) {
         let board = this.boards[index];
         fs.unlinkSync(this.pathBoards + `${board.idBoard}`);

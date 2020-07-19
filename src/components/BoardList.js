@@ -2,7 +2,7 @@ import React from 'react';
 import BoardCard from '../components/BoardCard';
 import NoBoards from '../components/NoBoards';
 
-const BoardList = ({boards, deleteBoard, copyBoard}) => {
+const BoardList = ({boards, deleteBoard, copyBoard, setBoard, setIsGame}) => {
     if(boards.length == 0) 
         return <NoBoards/>;
 
@@ -10,11 +10,11 @@ const BoardList = ({boards, deleteBoard, copyBoard}) => {
         return <BoardCard
         key={board.idBoard} 
         index={index}
-        titleBoard={board.titleBoard} 
-        themeColor={board.themeColor}
-        dateModified={board.dateModified}
+        board={board}
         deleteBoard={deleteBoard}
         copyBoard={copyBoard}
+        setBoard={setBoard}
+        setIsGame={setIsGame}
         ></BoardCard>
     })
 

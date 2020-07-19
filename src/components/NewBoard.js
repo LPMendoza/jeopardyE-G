@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import PalleteColor from './PaletteColor';
+import ReactTooltip from "react-tooltip";
 
 const NewBoard = ({createBoard, cancelNewBoard}) => {
 
@@ -45,29 +47,25 @@ const NewBoard = ({createBoard, cancelNewBoard}) => {
                 autoFocus
                 placeholder="Ingresa aquí el título del tablero" 
                 className="titulo-board-input d-block col-12 px-0"
-                maxLength="62"
+                maxLength="50"
                 onChange={handleChange}
                 id="txtTitleBoard"
                 />
                 <span className={errorClass}>Debes ingresar el título del tablero</span>
-                <div className="container-palette-color my-2 btn-group" role="group">
-                    <button className="btn option-color btn-primary" onClick={() => { setThemeColor("#118AB2")}}></button>
-                    <button className="btn option-color btn-danger" onClick={() => { setThemeColor("#EF476F") }}></button>
-                    <button className="btn option-color btn-success" onClick={() => { setThemeColor("#06D6A0") }}></button>
-                    <button className="btn option-color btn-warning" onClick={() => { setThemeColor("#FFD166") }}></button>
-                    <button className="btn option-color btn-purple" onClick={() => { setThemeColor("#7511B2") }}></button>
-                </div>
+                <PalleteColor onChangeTheme={setThemeColor} />
             </div>
             <div className="col-2 pl-3 px-0 border-left">
-                <button data-tooltip="Crear tablero" className="tooltip-bottom btn btn-board-card btn-success rounded-circle mr-2 shadow-sm"
+                <button data-tip="Crear tablero" className="tooltip-bottom btn btn-circle btn-success rounded-circle mr-2 shadow-sm"
                 onClick={handleCreateBoard}>
                     <span className="fas fa-check"></span>
                 </button>
-                <button data-tooltip="Cancelar" className="tooltip-bottom btn btn-board-card btn-danger rounded-circle shadow-sm"
+                <button data-tip="Cancelar" className="tooltip-bottom btn btn-circle btn-danger rounded-circle shadow-sm"
                 onClick={cancelNewBoard}>
                     <span className="fas fa-times"></span>
                 </button>
             </div>
+            <ReactTooltip place="right" type="dark" effect="solid"/>
+
         </div>
     )   
 }

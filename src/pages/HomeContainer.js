@@ -1,10 +1,6 @@
 import React from 'react';
 import Home from './Home';
-import BoardController from '../controllers/BoardController';
 import swal from 'sweetalert';
-
-const { remote } = window.require('electron');
-let boardCtrl = new BoardController();
 
 export default class HomeContainer extends React.Component {
     
@@ -12,7 +8,6 @@ export default class HomeContainer extends React.Component {
         super(props);
 
         this.state = {
-            maximize: true,
             boards: [],
             boardsAux: [],
             loading: true,
@@ -20,32 +15,7 @@ export default class HomeContainer extends React.Component {
             orderByDate: 1
         }
 
-    }
-
-    handleMaximize = (e) => {
-        let currentWindow = remote.getCurrentWindow();
-        if(this.state.maximize) {
-            currentWindow.unmaximize()
-            this.setState({
-                maximize: false
-            })
-        }
-        else {
-            currentWindow.maximize()
-            this.setState({
-                maximize: true
-            })
-        }
-    }
-
-    handleMinimize = (e) => {
-        let currentWindow = remote.getCurrentWindow();
-        currentWindow.minimize();
-    }
-
-    handleClose = (e) => {
-        let currentWindow = remote.getCurrentWindow();
-        currentWindow.close();
+        this.boardCtrl = this.props.boardCtrl;
     }
 
     showLoading() {
@@ -61,7 +31,7 @@ export default class HomeContainer extends React.Component {
     }
 
     createBoard = (newBoard) => {
-        boardCtrl.createBoard(newBoard, 1);
+        this.boardCtrl.createBoard(newBoard, 1);
         this.getBoards();
     }
 
@@ -76,8 +46,8 @@ export default class HomeContainer extends React.Component {
 
             if (accept) {
                 this.showLoading();
-                boardCtrl.boards = this.state.boardsAux;
-                boardCtrl.copyBoard(index);
+                this.boardCtrl.boards = this.state.boardsAux;
+                this.boardCtrl.copyBoard(index);
                 this.getBoards();
             }
 
@@ -94,8 +64,8 @@ export default class HomeContainer extends React.Component {
         .then((accept) => {
             if(accept) {
                 this.showLoading();
-                boardCtrl.boards = this.state.boardsAux;
-                boardCtrl.deleteBoard(index);
+                this.boardCtrl.boards = this.state.boardsAux;
+                this.boardCtrl.deleteBoard(index);
                 this.getBoards();
 
             }
@@ -105,8 +75,8 @@ export default class HomeContainer extends React.Component {
     orderByTitle = (e) => {
         let orderedBoards = [];
         if(this.state.orderByTitle == 1) {
-            boardCtrl.boards = this.state.boardsAux;
-            orderedBoards = boardCtrl.orderByTitle(2);
+            this.boardCtrl.boards = this.state.boardsAux;
+            orderedBoards = this.boardCtrl.orderByTitle(2);
 
             this.setState({
                 orderByTitle: 2,
@@ -114,8 +84,8 @@ export default class HomeContainer extends React.Component {
             })
         }
         else {
-            boardCtrl.boards = this.state.boardsAux;
-            orderedBoards = boardCtrl.orderByTitle(1);
+            this.boardCtrl.boards = this.state.boardsAux;
+            orderedBoards = this.boardCtrl.orderByTitle(1);
 
             this.setState({
                 orderByTitle: 1,
@@ -129,15 +99,15 @@ export default class HomeContainer extends React.Component {
     orderByDate = (e) => {
         let orderedBoards = [];
         if (this.state.orderByDate == 1) {
-            boardCtrl.boards = this.state.boardsAux;
-            orderedBoards = boardCtrl.orderByDate(2);
+            this.boardCtrl.boards = this.state.boardsAux;
+            orderedBoards = this.boardCtrl.orderByDate(2);
             this.setState({
                 boardsAux: orderedBoards,
                 orderByDate: 2,
             })
         } else {
-            boardCtrl.boards = this.state.boardsAux;
-            orderedBoards = boardCtrl.orderByDate(1);
+            this.boardCtrl.boards = this.state.boardsAux;
+            orderedBoards = this.boardCtrl.orderByDate(1);
             this.setState({
                 boardsAux: orderedBoards,
                 orderByDate: 1,
@@ -149,7 +119,7 @@ export default class HomeContainer extends React.Component {
     getBoards() {
 
         this.showLoading();
-        let boards = boardCtrl.getBoards();
+        let boards = this.boardCtrl.getBoards();
         if (this.validateError(boards)) {
             this.setState({
                 boards: boards,
@@ -214,17 +184,15 @@ export default class HomeContainer extends React.Component {
             
             <Home 
             boards={boardsAux}
-            handleMaximize={this.handleMaximize}
-            handleMinimize={this.handleMinimize}
-            handleClose={this.handleClose}
             createBoard={this.createBoard}
             deleteBoard={this.deleteBoard}
             copyBoard={this.copyBoard}
             searchBoards={this.searchBoards}
             orderByTitle={this.orderByTitle}
             orderByDate={this.orderByDate}
-            maximize={maximize}
-            boardCtrl={boardCtrl}
+            setBoard={this.props.setBoard}
+            setIsGame={this.props.setIsGame}
+            boardCtrl={this.boardCtrl}
             loading={loading}
             />
         )
