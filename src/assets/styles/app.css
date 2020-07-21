@@ -437,16 +437,23 @@ input::placeholder {
     text-align: center !important;
 }
 
-.cell-board {
-    width: 200px;
-    height: 60px !important;
-    margin: 0rem 0rem 0.5rem 0rem;
-    display: flex !important;
+.container-cell {
+    display: flex;
+    white-space: nowrap;
     align-items: center !important;
     justify-content: center !important;
+}
+
+.cell-board {
+    width: 200px;
+    display: flex;
+    height: 60px !important;
+    margin: 0rem 0rem 0.5rem 0rem;
     border-radius: 4px;
     cursor: pointer;
     animation: fade-in 0.3s ease;
+    align-items: center;
+    justify-content: center;
 }
 
 .cell-board > input {
@@ -500,6 +507,17 @@ input::placeholder {
 .container-column:hover .container-ctrl-columns {
     opacity: 1;
     transition: 0.2s ease;
+}
+
+.container-ctrl-cell {
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-140px);
+}
+
+.container-cell:hover .container-ctrl-cell {
+    opacity: 1;
+    transition: 0.2s ease;  
 }
 
 .option-color {

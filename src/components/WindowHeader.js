@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import swal from 'sweetalert';
 const {remote} = window.require("electron");
 
 const WindowHeader = ({
@@ -31,8 +32,17 @@ const WindowHeader = ({
     }
 
     const handleClose = (e) => {
-        let currentWindow = remote.getCurrentWindow();
-        currentWindow.close();
+        swal({
+            title: "Would you like to exit?",
+            text: "All you haven't saved will lost",
+            buttons: ["No", "Yes"]
+        })
+        .then((accept) => {
+            if(accept) {
+                let currentWindow = remote.getCurrentWindow();
+                currentWindow.close();
+            }
+        });
     }
 
     let classBackButton = "d-none";

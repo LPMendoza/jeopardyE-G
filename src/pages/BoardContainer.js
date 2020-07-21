@@ -105,6 +105,31 @@ export default class BoardContainer extends React.Component {
         });
     }
 
+    onDeleteRow = (index) => {
+        swal({
+            title: "Would you like to delete the row?",
+            icon: "warning",
+            buttons: ["No", "Yes"]
+        })
+        .then((accept) => {
+            if(accept) {
+                let columns = this.state.board.columns;
+                let board = this.state.board;
+
+                board.columns = columns.map((column) => {
+                    column.questions.splice(index, 1);
+                    return column;
+                });
+
+                this.setState({
+                    board
+                });
+
+            }
+        });
+        
+    }
+
     onChangeTheme = (color) => {
         let board = this.state.board;
         board.themeColor = color;
@@ -179,6 +204,7 @@ export default class BoardContainer extends React.Component {
             onClickSave={this.onClickSave}
             onChangeQuestion={this.onChangeQuestion}
             onDeleteColumn={this.onDeleteColumn}
+            onDeleteRow={this.onDeleteRow}
             />
         )
     }

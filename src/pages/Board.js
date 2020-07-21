@@ -30,7 +30,7 @@ export default class Board extends React.Component {
     showEditCtrl = () => {
         if(this.props.isGame == false) {
             return (
-                <div className="ctrl-grid-boards bg-white text-center px-2 shadow">
+                <div className="ctrl-grid-boards bg-white text-center px-2 py-1 shadow">
                     <button
                         onClick={this.props.onClickSave}
                         data-tip="Save"
@@ -137,6 +137,8 @@ export default class Board extends React.Component {
                             onChangeQuestion={this.props.onChangeQuestion}
                             setScoreOp={this.setScoreOp}
                             onDeleteColumn={this.props.onDeleteColumn}
+                            onDeleteRow={this.props.onDeleteRow}
+
                         />
                     </div>
                     {
