@@ -18,7 +18,7 @@ const PaletteColor = ({onChangeTheme}) => {
         <div className="d-inline-block dropdown">
             {/* <h6 className="mr-2 d-inline-block">Tema</h6> */}
             <button onClick={handleClickPalette} 
-                data-tip="Tema"
+                data-tip="Color theme"
                 id="btnPalette"
                 className="tooltip-bottom btn btn-white btn-circle rounded-circle btn-palette" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="fas fa-palette"></span>

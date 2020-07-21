@@ -2,7 +2,14 @@ import React from 'react';
 import BoardCard from '../components/BoardCard';
 import NoBoards from '../components/NoBoards';
 
-const BoardList = ({boards, deleteBoard, copyBoard, setBoard, setIsGame}) => {
+const BoardList = ({
+    boards, 
+    deleteBoard, 
+    editBoard,
+    copyBoard, 
+    setBoard, 
+    setIsGame
+}) => {
     if(boards.length == 0) 
         return <NoBoards/>;
 
@@ -12,6 +19,7 @@ const BoardList = ({boards, deleteBoard, copyBoard, setBoard, setIsGame}) => {
         index={index}
         board={board}
         deleteBoard={deleteBoard}
+        editBoard={editBoard}
         copyBoard={copyBoard}
         setBoard={setBoard}
         setIsGame={setIsGame}

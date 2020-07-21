@@ -11,13 +11,12 @@ const Home = (
         boards, 
         createBoard,
         deleteBoard,
-        setBoard,
-        setIsGame,
+        editBoard,
         copyBoard,
         searchBoards,
         orderByTitle,
         orderByDate,
-        loading
+        loading,
     }) => {
     
     var contBoardClass = "";
@@ -53,15 +52,14 @@ const Home = (
 
     let isLoading = () => {
         if (loading) {
-            return <Loading text={"Cargando tableros"} /> ;
+            return <Loading text={"Loading"} /> ;
         }
         else {
             return <BoardList 
             boards={boards} 
             deleteBoard={deleteBoard}
             copyBoard={copyBoard} 
-            setBoard={setBoard}
-            setIsGame={setIsGame}
+            editBoard={editBoard}
             />;
         }
     }
@@ -111,28 +109,28 @@ const Home = (
                     classColor="text-dark" />
                     <div className="container">
                         <div className="container-header-boards row align-items-center justify-content-between mb-1">
-                            <Title title="Tableros" readOnly classColor="text-dark" />
+                            <Title title="Boards" readOnly classColor="text-dark" />
                             <div className="row align-items-center col-12 col-md-auto">
                                     
                                     <button
                                     onClick={handleOrderTitle}
-                                    data-tip="Ordenar por título" 
+                                    data-tip="Sort by title" 
                                     style={{height: "40px"}} 
                                     className="tooltip-bottom btn shadow-sm rounded-pill btn-white text-dark my-2 my-md-0" disabled={isNewBoard}>
                                         <span className={classOrderTitle + activeTitle}></span>
-                                        Título
+                                        Title
                                     </button>
                                     <button 
                                     onClick={handleOrderDate}
-                                    data-tip="Ordenar por fecha"
+                                    data-tip="Sort by modification date"
                                     style={{height: "40px"}} 
                                     className="tooltip-bottom btn shadow-sm rounded-pill btn-white text-dark ml-3 my-2 my-md-0" disabled={isNewBoard}>
                                         <span className={classOrderDate + activeDate}></span>
-                                        Fecha
+                                        Date
                                     </button>
 
                                 <div className="mx-3 pl-3 rounded-pill shadow-sm my-2 my-md-0">
-                                    <input id="txtSearch" onChange={searchBoards} type="text" disabled={isNewBoard} placeholder="Buscar" className="txtSearch" required/>
+                                    <input id="txtSearch" onChange={searchBoards} type="text" disabled={isNewBoard} placeholder="Search" className="txtSearch" required/>
                                     <span className="fas fa-search iconSearch mr-3 ml-2"></span>
                                 </div>
                                 <button 
@@ -140,7 +138,7 @@ const Home = (
                                 disabled={isNewBoard}
                                 onClick={handleNewBoard}>
                                     <span className="fa fa-plus mr-2"></span>
-                                    Nuevo tablero
+                                    New board
                                 </button>
 
                             </div>

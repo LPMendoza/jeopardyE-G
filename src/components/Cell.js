@@ -1,52 +1,48 @@
-import React, {useState} from 'react';
-import Question from './Question';
+import React from 'react';
 
 const Cell = ({
     question, 
-    themeColor,
     indexQ, 
     indexC,
     readOnly,
     onChangeCell,
-    onChangeQuestion
+    setCellClicked,
+    setShowQuestion,
+    setFocusText,
+    foucusText
 }) => {
     let cellDom = question.value;
 
-    let [showQuestion, setShowQuestion] = useState("");
-    let [isAnswered, setAnswered] = useState(false);
+    const handleFocus = (e) => {
+        setFocusText(true);
+        e.target.select();
+    }
+
+    const handleBlur = (e) => {
+        setFocusText(false);
+    }
+
 
     if(readOnly == false ){
-        cellDom = <input onChange={onChangeCell} type="number" id={`cell-${indexC}-${indexQ}`} readOnly={readOnly} defaultValue={question.value} />
+        cellDom = <input onBlur={handleBlur} onFocus={handleFocus} onChange={onChangeCell} type="number" id={`cell-${indexC}-${indexQ}`} readOnly={readOnly} defaultValue={question.value} />
     }
 
     let handleShowQuestion = (e) => {
-        setShowQuestion("question-showed")
+        if (!foucusText) {
+            setShowQuestion(true);
+            setCellClicked([indexC, indexQ]);
+        }
     }
-
 
     return(
         <React.Fragment>
             <div 
             onClick={handleShowQuestion} 
-            id={`cell-${indexQ}`}
+            id={`cell-${indexQ}-${indexC}`}
             className="cell-board d-block btn-white shadow-sm" 
-            style={{
-                color: `${isAnswered ? themeColor : "text-dark"}`
-            }}
             >
                 {cellDom}
             </div>
-            <Question 
-            indexC={indexC}
-            indexQ={indexQ}
-            question={question} 
-            showQuestion={showQuestion} 
-            setShowQuestion={setShowQuestion} 
-            readOnly={readOnly}
-            themeColor={themeColor}
-            onChangeQuestion={onChangeQuestion}
-            setAnswered={setAnswered}
-            />
         </React.Fragment>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from './Board';
 import Loading from '../components/Loading';
+import swal from 'sweetalert';
 
 export default class BoardContainer extends React.Component {
     
@@ -48,6 +49,7 @@ export default class BoardContainer extends React.Component {
         this.setState({
             board
         });
+
     }
 
     onAddColumn = (e) => {
@@ -58,6 +60,39 @@ export default class BoardContainer extends React.Component {
         this.setState({
             board
         });
+    }
+
+    onSortColumns = (columns) => {
+        let board = this.state.board;
+        board.columns = columns;
+
+        this.setState({
+            board
+        });
+    }
+
+    onDeleteColumn = (index) => {
+        swal({
+            title: "Would you like to delete the column?",
+            icon: "warning",
+            buttons: ["No", "Yes"]
+        })
+        .then((accept) => {
+            if(accept) {
+                let columns = this.state.board.columns;
+                let board = this.state.board;
+
+                columns.splice(index, 1);
+
+                board.columns = columns;
+
+                this.setState({
+                    board
+                });
+
+            }
+        });
+        
     }
 
     onAddRow = (e) => {
@@ -135,6 +170,7 @@ export default class BoardContainer extends React.Component {
             board={board} 
             isGame={isGame} 
             onChangeTitle={this.onChangeTitle}
+            onSortColumns={this.onSortColumns}
             onChangeColumnTitle={this.onChangeColumnTitle}
             onChangeCell={this.onChangeCell}
             onChangeTheme={this.onChangeTheme}
@@ -142,6 +178,7 @@ export default class BoardContainer extends React.Component {
             onAddRow={this.onAddRow}
             onClickSave={this.onClickSave}
             onChangeQuestion={this.onChangeQuestion}
+            onDeleteColumn={this.onDeleteColumn}
             />
         )
     }

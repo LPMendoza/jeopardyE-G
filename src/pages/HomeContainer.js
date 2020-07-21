@@ -31,16 +31,19 @@ export default class HomeContainer extends React.Component {
     }
 
     createBoard = (newBoard) => {
-        this.boardCtrl.createBoard(newBoard, 1);
-        this.getBoards();
+        this.showLoading();
+        let board = this.boardCtrl.createBoard(newBoard, 1);
+        this.props.setBoard(board);
+        this.props.setIsGame(false);
+        window.location.hash = "/board";
     }
 
     copyBoard = (e) => {
         let index = e.target.id;
         swal({
-            title: `¿Desea realizar una copia del tablero "${this.state.boardsAux[e.target.id].titleBoard}"?`,
+            title: `¿Would you like to copy "${this.state.boardsAux[e.target.id].titleBoard}"?`,
             icon: "warning",
-            buttons: ["Cancelar", "Aceptar"]
+            buttons: ["No", "Yes"]
         })
         .then((accept) => {
 
@@ -57,9 +60,9 @@ export default class HomeContainer extends React.Component {
     deleteBoard = (e) => {
         let index = e.target.id;
         swal({
-            title: `¿Desea eliminar el tablero "${this.state.boardsAux[e.target.id].titleBoard}"?`,
+            title: `¿Would you like to delete "${this.state.boardsAux[e.target.id].titleBoard}"?`,
             icon: "warning",
-            buttons: ["Cancelar", "Aceptar"]
+            buttons: ["No", "Yes"]
         })
         .then((accept) => {
             if(accept) {
@@ -134,7 +137,7 @@ export default class HomeContainer extends React.Component {
     validateError(object) {
         if (object.error) {
             swal({
-                title: "Hubo un error, intente más tarde",
+                title: "An error occurrred, try later",
                 icon: "error",
                 buttons: "Aceptar"
             });
@@ -170,6 +173,13 @@ export default class HomeContainer extends React.Component {
         }
     }
 
+    editBoard = (board, isGame) => {
+        this.showLoading();
+        this.props.setBoard(board);
+        this.props.setIsGame(isGame);
+        window.location.hash = "/board";
+    }
+
 
     componentDidMount() {
         this.setState({
@@ -179,13 +189,14 @@ export default class HomeContainer extends React.Component {
     }
 
     render() {
-        const {boardsAux, maximize, loading} = this.state;
+        const {boardsAux, loading} = this.state;
         return (
             
             <Home 
             boards={boardsAux}
             createBoard={this.createBoard}
             deleteBoard={this.deleteBoard}
+            editBoard={this.editBoard}
             copyBoard={this.copyBoard}
             searchBoards={this.searchBoards}
             orderByTitle={this.orderByTitle}

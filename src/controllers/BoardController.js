@@ -56,7 +56,7 @@ export default class BoardController {
 
         board["dateModified"] = this.createDate();
         board["columns"] = [{
-            "titleColumn": "Columna 1",
+            "titleColumn": "Column",
             "questions": [{
                 "text": "",
                 "answer": "",
@@ -67,15 +67,15 @@ export default class BoardController {
                 "value": 200
             }, {
                 "text": "",
-                "answer": "Respuesta",
+                "answer": "",
                 "value": 300
             }, {
                 "text": "",
-                "answer": "Respuesta",
+                "answer": "",
                 "value": 400
             }, {
                 "text": "",
-                "answer": "Respuesta",
+                "answer": "",
                 "value": 500
             }]
         }]
@@ -112,7 +112,7 @@ export default class BoardController {
 
     addColumn(length) {
         let column = {
-            "titleColumn": "Columna",
+            "titleColumn": "Column",
             "questions": []
         }
         for(var i = 1; i <= length; i++) {

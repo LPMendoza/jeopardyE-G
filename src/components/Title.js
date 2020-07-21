@@ -8,7 +8,7 @@ const Title = ({
     }) => {
     let domTitle = <h1 className={classColor}> {title} </h1>;
     if(readOnly == false) {
-        domTitle = <input onChange={onChangeTitle} type="text" maxLength="50" defaultValue={title} readOnly={readOnly} className={"titleBoard col-12 " + classColor}/>;
+        domTitle = <input onChange={onChangeTitle} type="text" maxLength="50" defaultValue={title} readOnly={readOnly} placeholder="Type here the board name" className={"titleBoard col-12 " + classColor}/>;
     }
     return (
         

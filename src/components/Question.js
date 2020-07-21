@@ -7,21 +7,23 @@ export default class Question extends React.Component {
         super(props);
 
         this.state = {
-            showedAnswer: ""
+            showedAnswer: "",
+            showedQuestion: ""
         }
 
         this.domQuestion = <div className="txtQuestion" id={`question-${this.props.indexQ}-${this.props.indexC}`}/>;
         this.domAnswer = <div className="txtAnswer" id={`answer-${this.props.indexQ}-${this.props.indexC}`}/>;
-
     }
- 
+    
 
     handleHide = (e) => {
-        this.props.setShowQuestion("");
-    }
+        this.setState( {
+            showedQuestion: "hideQuestion"
+        })
+        setTimeout(() => {
+            this.props.setShowQuestion(false);
 
-    showAnswer = (e) => {
-        this.props.setAnswered(true);
+        }, 300)
     }
 
     confQuillEditor = () => {
@@ -64,43 +66,45 @@ export default class Question extends React.Component {
             showedAnswer: "showAnswer"
         });
         if(this.props.readOnly) {
-            this.props.setAnswered(true);
+            document.getElementById(`cell-${this.props.indexQ}-${this.props.indexC}`).style.color = this.props.themeColor;
+            this.props.setScoreOp(this.props.columns[this.props.indexC].questions[this.props.indexQ].value);
         }
     }
 
     handleChangeQuestion = (text) => {
-        let question = this.props.question;
+        let question = this.props.columns[this.props.indexC].questions[this.props.indexQ];
         question.text = text;
         this.props.onChangeQuestion(this.props.indexC, this.props.indexQ, question);
     }
 
     handleChangeAnswer = (answer) => {
-        let question = this.props.question;
+        let question = this.props.columns[this.props.indexC].questions[this.props.indexQ];
         question.answer = answer;
         this.props.onChangeQuestion(this.props.indexC, this.props.indexQ, question);
     }
 
-    showQueston = () => {
-        document.getElementById(`question-${this.props.indexQ}-${this.props.indexC}`).innerHTML = this.props.question.text;
-        document.getElementById(`answer-${this.props.indexQ}-${this.props.indexC}`).innerHTML = this.props.question.answer;
+    showQuestion = () => {
+        document.getElementById(`question-${this.props.indexQ}-${this.props.indexC}`).innerHTML = "";
+        document.getElementById(`answer-${this.props.indexQ}-${this.props.indexC}`).innerHTML = "";
+
+        document.getElementById(`question-${this.props.indexQ}-${this.props.indexC}`).innerHTML = this.props.columns[this.props.indexC].questions[this.props.indexQ].text;
+        document.getElementById(`answer-${this.props.indexQ}-${this.props.indexC}`).innerHTML = this.props.columns[this.props.indexC].questions[this.props.indexQ].answer;
     }
 
     componentDidMount(){
-        this.showQueston();
+        this.showQuestion();
         if(!this.props.readOnly){
             this.confQuillEditor();
             this.setState({
                 showedAnswer: "showAnswer"
             });
         }
-
-        
     }
 
     render() {
 
         return (
-            <div className={`page-question ${this.props.showQuestion}`} style={{ backgroundColor: this.props.themeColor }}>
+            <div className={`page-question ${this.state.showedQuestion}`} style={{ backgroundColor: this.props.themeColor }}>
                 <div className="menuBar-question">
                     <div className="window-btn" onClick={this.handleHide}> <span className={"fas fa-arrow-left text-white"}></span></div>
                     

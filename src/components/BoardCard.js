@@ -2,15 +2,19 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
 
-const BoardCard = ({index, board, copyBoard, deleteBoard, setBoard, setIsGame}) => {
+const BoardCard = ({
+    index, 
+    board, 
+    copyBoard, 
+    deleteBoard, 
+    editBoard
+}) => {
     const handleEdit = (e) => {
-        setBoard(board);
-        setIsGame(false);
+        editBoard(board, false);
     }
 
     const handleGame = (e) => {
-        setBoard(board);
-        setIsGame(true);
+        editBoard(board, true);
     }
 
     return(
@@ -23,23 +27,19 @@ const BoardCard = ({index, board, copyBoard, deleteBoard, setBoard, setIsGame}) 
                     <span className="fecha-card">{board.dateModified}</span>
                 </div>
                 <div className="col-2 pl-3 px-0 border-left">
-                    <Link to="/board">
-                        <button onClick={handleGame} data-tip="Jugar tablero" id={index}
+                    <button onClick={handleGame} data-tip="Play board" id={index}
                             className=" tooltip-bottom btn btn-circle btn-primary rounded-circle mr-2 shadow-sm btnPlay">
                             <span className="fas fa-play"></span>
-                        </button>
-                    </Link>
-                    <Link to="/board">
-                        <button onClick={handleEdit} data-tip="Editar tablero" id={index}
-                            className=" tooltip-bottom btn btn-circle btn-warning rounded-circle mr-2 shadow-sm btnEdit">
-                            <span id={index} className="fas fa-pen"></span>
-                        </button>
-                    </Link>
-                    <button data-tip="Copiar tablero" onClick={copyBoard} id={index} 
+                    </button>
+                    <button onClick={handleEdit} data-tip="Edit board" id={index}
+                        className=" tooltip-bottom btn btn-circle btn-warning rounded-circle mr-2 shadow-sm btnEdit">
+                        <span id={index} className="fas fa-pen"></span>
+                    </button>
+                    <button data-tip="Copy board" onClick={copyBoard} id={index} 
                     className=" tooltip-bottom btn btn-circle btn-success rounded-circle mr-2 shadow-sm btnCopy">
                         <span id={index} className="fas fa-copy"></span>
                     </button>
-                    <button data-tip="Eliminar tablero" onClick={deleteBoard} id={index} 
+                    <button data-tip="Delete board" onClick={deleteBoard} id={index} 
                     className=" tooltip-bottom btn btn-circle btn-danger rounded-circle  shadow-sm btnDelete">
                         <span id={index} className="fas fa-trash"></span>
                     </button>
