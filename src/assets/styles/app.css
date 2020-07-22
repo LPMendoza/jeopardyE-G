@@ -221,6 +221,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Futura-Bold";
     text-align: center;
     border: none;
+    font-size: 14px;
 }
 
 input:focus.titleColumn {
@@ -457,7 +458,7 @@ input::placeholder {
 }
 
 .cell-board > input {
-    width: 100px !important;
+    width: 50px !important;
     text-align: center;
     border: none !important;
 }
@@ -503,6 +504,12 @@ input::placeholder {
     background-color: rgba(255, 255, 255, 1) !important;
     border-radius: 4px;
 }
+
+.draggableCell {
+    background-color: #eee !important;
+    border-radius: 4px;
+}
+
 
 .container-column:hover .container-ctrl-columns {
     opacity: 1;

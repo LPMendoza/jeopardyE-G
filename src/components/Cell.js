@@ -29,7 +29,8 @@ const Cell = ({
     }
 
     if(readOnly == false ){
-        cellDom = <input onBlur={handleBlur} onFocus={handleFocus} onChange={onChangeCell} type="number" id={`cell-${indexC}-${indexQ}`} readOnly={readOnly} value={question.value} />
+        cellDom = <input onBlur={handleBlur} onFocus={handleFocus} onChange={onChangeCell} type="number" id={`cell-${indexC}-${indexQ}`} readOnly={readOnly} value={question.value} 
+        style={{marginLeft: "1rem"}} />
     }
 
     let handleShowQuestion = (e) => {

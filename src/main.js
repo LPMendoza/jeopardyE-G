@@ -22,7 +22,7 @@ function createWindow() {
             nodeIntegration: true
         },
         
-        //frame: false,
+        frame: false,
     })
 
     // and load the index.html of the app.
@@ -35,7 +35,7 @@ function createWindow() {
 
     win.maximize();
     // Open the DevTools.
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {

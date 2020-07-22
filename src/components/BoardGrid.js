@@ -23,6 +23,7 @@ const BoardGrid = ({
     const [cellClicked, setCellClicked] = useState([0, 0]);
     let [showQuestion, setShowQuestion] = useState(false);
     let [foucusText, setFocusText] = useState(false);
+    let questions = [];
 
     const createCtrlColumn = (index) => {
 
@@ -38,30 +39,12 @@ const BoardGrid = ({
 
     }
 
-    // const createCtrlRow = (index) => {
-
-    //     return (
-    //         <div className="text-center pb-1 d-inline-block" key={`ctrlRow-${index}`} style={{height: "60px"}}>
-    //             <button onClick={(e) => { onDeleteColumn(index) }} key={`btnRow-${index}`} className="btn btn-white btn-circle rounded-circle shadow-sm mb-2 text-danger"> <span key={index} className="fas fa-trash"></span> </button>
-    //         </div>
-    //     ) 
+    const sortQuestions = (questions, indexC) => {
+        let newColumns = columns;
+        newColumns[indexC].questions = questions;
         
-
-    // }
-
-    // const showCtrlsRow = () => {
-    //     return (
-    //         <div className="d-inline-block container-column mx-1 mb-2 d-inline-block" >
-    //                 <div className="h6 titleColumn column-board my-4" style={{height: "21px"}} />
-    //                 {
-    //                     columns[0].questions.map((cell, index) => {
-    //                         return createCtrlRow(index);
-    //                     })
-    //                 }
-    //         </div>
-    //     )
-        
-    // }
+        onSortColumns(newColumns);
+    }
 
     const showColumns = () => (
         columns.map((column, indexC) => {
@@ -78,18 +61,19 @@ const BoardGrid = ({
                     onChange={onChangeColumnTitle}
                     maxLength="22"
                     />
-                    {/* <ReactSortable 
+                    <ReactSortable 
                     list={column.questions} 
-                    setList={setColumnsS}
-                    multiDrag
-
+                    setList={(newQuestions) => { sortQuestions(newQuestions, indexC)} }
                     group="container-column"
                     animation={200}
                     ghostClass={"draggableCell"}
+                    swapClass={"draggableCell"}
                     selectedClass={"draggableClass"}
-                    > */}
+                    >
                         {
                             column.questions.map((question, indexQ) => {
+                                question["columnIndex"] = indexC;
+                                questions.push(question);
                                 return (
                                     <div key={indexQ}>
                                         <Cell 
@@ -111,7 +95,7 @@ const BoardGrid = ({
                             })
                         }
                         
-                    {/* </ReactSortable> */}
+                    </ReactSortable>
                     {
                         (!readOnly && columns.length > 1) ? createCtrlColumn(indexC) : ""
                     }
@@ -122,9 +106,6 @@ const BoardGrid = ({
     return (
         <div className="container-fluid px-5">
             <div className="rowColumns">
-            {/* {
-                showCtrlsRow()
-            } */}
                 <ReactSortable 
                 list={columns} 
                 setList={onSortColumns}
