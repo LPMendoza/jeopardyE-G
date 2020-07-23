@@ -54,7 +54,7 @@ const NewBoard = ({createBoard, cancelNewBoard}) => {
                 <span className={errorClass}>You have to type the board name</span>
                 <PalleteColor onChangeTheme={setThemeColor} />
             </div>
-            <div className="col-2 pl-3 px-0 border-left">
+            <div className="col-lg-2 col-12 mt-2 mt-lg-0 pl-3 px-0 border-left">
                 <button data-tip="Create board" className="tooltip-bottom btn btn-circle btn-success rounded-circle mr-2 shadow-sm"
                 onClick={handleCreateBoard}>
                     <span className="fas fa-check"></span>

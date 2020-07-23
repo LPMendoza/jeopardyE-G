@@ -13,7 +13,6 @@ const Cell = ({
     foucusText,
     onDeleteRow
 }) => {
-    let cellDom = question.value;
 
     const handleFocus = (e) => {
         setFocusText(true);
@@ -27,10 +26,11 @@ const Cell = ({
     const handleDeleteRow = (e) => {
         onDeleteRow(indexQ);
     }
-
-    if(readOnly == false ){
+    
+    let cellDom = <label>{question.value}</label>
+    if(readOnly == false ) {
         cellDom = <input onBlur={handleBlur} onFocus={handleFocus} onChange={onChangeCell} type="number" id={`cell-${indexC}-${indexQ}`} readOnly={readOnly} value={question.value} 
-        style={{marginLeft: "1rem"}} />
+        />
     }
 
     let handleShowQuestion = (e) => {

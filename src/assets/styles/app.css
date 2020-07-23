@@ -252,8 +252,9 @@ input:focus.titleBoard {
     position: fixed;
     top: 0%;
     left: 50%;
-    margin-left: -80px;
+    margin-left: -76px;
     border-radius: 0px 0px 4px 4px;
+    -webkit-app-region: no-drag;
 }
 
 .container-teams {
@@ -427,6 +428,7 @@ input::placeholder {
 .container-column {
     padding: 0rem .25rem;
     animation: fade-in 0.3s ease;
+    transition: 0.2s ease;
 }
 
 .rowColumns > div {
@@ -453,12 +455,24 @@ input::placeholder {
     border-radius: 4px;
     cursor: pointer;
     animation: fade-in 0.3s ease;
-    align-items: center;
     justify-content: center;
+    align-content: center;
 }
 
 .cell-board > input {
-    width: 50px !important;
+    width: 100px;
+    height: 16px !important;
+    align-self: center;
+    margin-left: 0px !important;
+    text-align: center;
+    border: none !important;
+}
+
+.cell-board>label {
+    width: 100px;
+    height: 16px !important;
+    align-self: center;
+    margin-left: 0px !important;
     text-align: center;
     border: none !important;
 }
@@ -503,6 +517,8 @@ input::placeholder {
 .draggableClass {
     background-color: rgba(255, 255, 255, 1) !important;
     border-radius: 4px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+    transition: 0.2s ease;
 }
 
 .draggableCell {

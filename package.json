@@ -1,8 +1,17 @@
 {
   "name": "jeopardyeg",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "author": "Luis Pedro Mendoza",
+  "description": "Create jeopardy boards easily",
   "private": true,
-  "main": "./src/main.js",
+  "main": "./public/electron.js",
+  "homepage": "./",
+  "build": {
+    "appId": "jeopardy.eg",
+    "win": {
+      "icon": "build/icon.png"
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

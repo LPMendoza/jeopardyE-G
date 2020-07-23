@@ -26,7 +26,7 @@ const BoardCard = ({
                     <h4 className="titulo-board-card">{board.titleBoard}</h4>
                     <span className="fecha-card">{board.dateModified}</span>
                 </div>
-                <div className="col-2 pl-3 px-0 border-left">
+                <div className="col-lg-2 col-12 mt-2 mt-lg-0 pl-3 px-0 border-left">
                     <button onClick={handleGame} data-tip="Play board" id={index}
                             className=" tooltip-bottom btn btn-circle btn-primary rounded-circle mr-2 shadow-sm btnPlay">
                             <span className="fas fa-play"></span>

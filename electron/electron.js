@@ -16,7 +16,7 @@ let win
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 1024,
+        width: 1280,
         height: 720,
         webPreferences: {
             nodeIntegration: true
@@ -27,11 +27,13 @@ function createWindow() {
 
     // and load the index.html of the app.
     //win.loadFile('index.html')
-    win.loadURL(
-        isDev ?
-        'http://localhost:3000' :
-        `file://${path.join(__dirname, '../build/index.html')}`,
-    )
+    const startUrl = process.env.ELECTRON_START_URL || url.format({
+        pathname: path.join(__dirname, '../index.html'),
+        protocol: 'file:',
+        slashes: true,
+    });
+    win.loadURL(startUrl);
+
 
     win.maximize();
     // Open the DevTools.

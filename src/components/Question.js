@@ -29,14 +29,14 @@ export default class Question extends React.Component {
     confQuillEditor = () => {
         let toolbar = [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'image'],        
+            ['bold', 'italic', 'underline', 'strike'],        
             ['blockquote'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'script': 'sub' }, { 'script': 'super' }],      
             [{ 'indent': '-1' }, { 'indent': '+1' }],          
             [{ 'direction': 'rtl' }],                       
             [{ 'align': [] }],
-            ['clean']  
+            ['clean', 'image', 'video']  
         ]
         let quillQuestion = new Quill(`#question-${this.props.indexQ}-${this.props.indexC}`, {
             modules: {
