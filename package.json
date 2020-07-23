@@ -1,10 +1,11 @@
 {
   "name": "jeopardyeg",
+  "productName": "Jeopardy E & G",
   "version": "1.0.0",
   "author": "Luis Pedro Mendoza",
   "description": "Create jeopardy boards easily",
   "private": true,
-  "main": "./public/electron.js",
+  "main": "electron/electron.js",
   "homepage": "./",
   "build": {
     "appId": "jeopardy.eg",
@@ -31,8 +32,11 @@
     "react-tooltip": "^4.2.7",
     "sweetalert": "^2.1.2"
   },
+  "devDependencies": {},
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set BROWSER=none && react-scripts start",
+    "start-electron": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "build-electron": "mkdir build/src && robocopy electron build/electron",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
